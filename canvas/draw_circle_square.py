@@ -1,42 +1,42 @@
 from tkinter import Tk, Canvas, Radiobutton, IntVar
 
-# Funkcija za crtanje kruga
+# Function to draw a circle
 def draw_circle(event):
     x, y = event.x, event.y
     canvas.create_oval(x - 20, y - 20, x + 20, y + 20, fill='blue', outline='black')
 
-# Funkcija za crtanje pravokutnika
+# Function to draw a rectangle
 def draw_rectangle(event):
     x, y = event.x, event.y
     canvas.create_rectangle(x - 30, y - 20, x + 30, y + 20, fill='green', outline='black')
 
-# Funkcija koja poziva odgovarajuću funkciju za crtanje ovisno o odabranom obliku
+# Function that calls the appropriate drawing function based on the selected shape
 def on_click(event):
-    if shape_var.get() == 1:  # Ako je odabran krug
+    if shape_var.get() == 1:  # If "Circle" is selected
         draw_circle(event)
-    elif shape_var.get() == 2:  # Ako je odabran pravokutnik
+    elif shape_var.get() == 2:  # If "Rectangle" is selected
         draw_rectangle(event)
 
-# Kreiranje glavnog prozora
+# Create main window
 root = Tk()
-root.title("Crtanje oblika")
+root.title("Shape Drawing")
 
-# Varijabla koja pohranjuje odabrani oblik
+# Variable to store the selected shape
 shape_var = IntVar()
-shape_var.set(1)  # Zadano je odabrano "Krug"
+shape_var.set(1)  # Default selection is "Circle"
 
-# Kreiranje radio dugmadi za odabir oblika
-radio_circle = Radiobutton(root, text="Krug", variable=shape_var, value=1)
+# Create radio buttons for shape selection
+radio_circle = Radiobutton(root, text="Circle", variable=shape_var, value=1)
 radio_circle.pack()
-radio_rectangle = Radiobutton(root, text="Pravokutnik", variable=shape_var, value=2)
+radio_rectangle = Radiobutton(root, text="Rectangle", variable=shape_var, value=2)
 radio_rectangle.pack()
 
-# Kreiranje platna za crtanje
+# Create canvas for drawing
 canvas = Canvas(root, width=400, height=400, bg='white')
 canvas.pack()
 
-# Povezivanje lijevog klika miša sa funkcijom on_click
+# Bind left mouse click to on_click function
 canvas.bind("<Button-1>", on_click)
 
-# Pokretanje glavne petlje aplikacije
+# Run the application
 root.mainloop()
